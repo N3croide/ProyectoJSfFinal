@@ -1,0 +1,21 @@
+.buttonTable{
+    width:100%;
+    height: 100%;
+    border-radius: 20px;
+    max-width: 65px;
+    border-width: 1px;
+}
+.buttonTable:hover{
+    transform: scale(1.05);
+    background-color: #1775f178;
+}
+.headerTable{
+    border-width: 1px;
+}
+.headerTable th{
+    background-color: rgba(152, 147, 147, 0.587);
+
+}
+#buscador{
+    width: 100%;
+}

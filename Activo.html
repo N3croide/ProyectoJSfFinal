@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<script type="module" src="bootstrap/main.js" async></script>
+	<script type="module" src="js/app.js" defer></script>
+	<link rel="stylesheet" href="css/style.css">
+	<title>CampusShop</title>
+</head>
+<body>
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<div class="logo">
+				<img src="images/logo.png" alt="">
+			</div>
+		Campuslands</a>
+		<ul class="side-menu">
+			<li><a href="#"><i class='bx bxs-customize icon'></i>Activos<i class='bx bx-chevron-right icon-right'></a></i>
+				<ul class="side-dropdown activos">
+					<li class="hideSideBar" id="aggBtn"><a href="#" class = "btnSection" ><i class='bx bx-plus-circle icon'></i>Agregar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-search-alt icon'></i>Buscar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bxs-pencil icon'></i>Editar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-minus-circle icon' id="mostrarBoton"></i>Eliminar</a></li>
+				</ul>
+			</li>
+			<li><a href="#"><i class='bx bxs-inbox icon' ></i>Marcas<i class='bx bx-chevron-right icon-right' ></i></a>
+				<ul class="side-dropdown marcas">
+					<li class="hideSideBar" id="aggBtn"><a href="#" class = "btnSection" ><i class='bx bx-plus-circle icon'></i>Agregar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-search-alt icon'></i>Buscar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bxs-pencil icon'></i>Editar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-minus-circle icon'></i>Eliminar</a></li>
+				</ul>	
+			</li>
+			<li><a href="#"><i class='bx bx-male icon'></i>Personas<i class='bx bx-chevron-right icon-right' ></i></a>
+				<ul class="side-dropdown personas">
+					<li class="hideSideBar" id="aggBtn"><a href="#" class = "btnSection" ><i class='bx bx-plus-circle icon'></i>Agregar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-search-alt icon'></i>Buscar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bxs-pencil icon'></i>Editar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-minus-circle icon'></i>Eliminar</a></li>
+				</ul>
+			</li>
+			<li><a href="#"><i class='bx bx-male icon'></i>Estado<i class='bx bx-chevron-right icon-right' ></i></a>
+				<ul class="side-dropdown estado">
+					<li class="hideSideBar" id="aggBtn"><a href="#" class = "btnSection" ><i class='bx bx-plus-circle icon'></i>Agregar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-search-alt icon'></i>Buscar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bxs-pencil icon'></i>Editar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-minus-circle icon'></i>Eliminar</a></li>
+				</ul>
+			</li>
+			<li><a href="#"><i class='bx bxs-inbox icon' ></i>Tipo Persona<i class='bx bx-chevron-right icon-right' ></i></a>
+				<ul class="side-dropdown tipoPersona">
+					<li class="hideSideBar" id="aggBtn"><a href="#" class = "btnSection" ><i class='bx bx-plus-circle icon'></i>Agregar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-search-alt icon'></i>Buscar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bxs-pencil icon'></i>Editar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-minus-circle icon'></i>Eliminar</a></li>
+				</ul>
+			</li>
+			<li><a href="#"><i class='bx bxs-inbox icon' ></i>Tipo De Activo<i class='bx bx-chevron-right icon-right' ></i></a>
+				<ul class="side-dropdown tipoActivo">
+					<li class="hideSideBar" id="aggBtn"><a href="#" class = "btnSection" ><i class='bx bx-plus-circle icon'></i>Agregar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-search-alt icon'></i>Buscar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bxs-pencil icon'></i>Editar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-minus-circle icon'></i>Eliminar</a></li>
+				</ul>
+			</li>
+			<li><a href="#"><i class='bx bxs-inbox icon' ></i>Tipo Mov Activo<i class='bx bx-chevron-right icon-right' ></i></a>
+				<ul class="side-dropdown tipoMovAct">
+					<li class="hideSideBar" id="aggBtn"><a href="#" class = "btnSection" ><i class='bx bx-plus-circle icon'></i>Agregar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-search-alt icon'></i>Buscar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bxs-pencil icon'></i>Editar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-minus-circle icon'></i>Eliminar</a></li>
+				</ul>
+			</li>
+			<li><a href="#"><i class='bx bxs-inbox icon' ></i>Proveedores<i class='bx bx-chevron-right icon-right' ></i></a>
+				<ul class="side-dropdown proveedores">
+					<li class="hideSideBar" id="aggBtn"><a href="#" class = "btnSection" ><i class='bx bx-plus-circle icon'></i>Agregar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-search-alt icon'></i>Buscar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bxs-pencil icon'></i>Editar</a></li>
+					<li><a href="#" class = "btnSection" ><i class='bx bx-minus-circle icon'></i>Eliminar</a></li>
+				</ul>
+			</li>
+			
+			<li class="divider" data-text="Asignaciones"></li>
+			<li><a href="#"><i class='bx bxs-add-to-queue icon asignacion'></i>Asignacion<i class='bx bx-chevron-right icon-right' ></i></a>
+				<ul class="side-dropdown asignacion">
+					<li><a href="#" class="btnSection"><i class='bx bx-plus-circle icon'></i>Crear</a></li>
+					<li><a href="#" class="btnSection"><i class='bx bx-search-alt icon'></i>Asignar</a></li>
+					<li><a href="#" class="btnSection"><i class='bx bxs-pencil icon'></i>Retornar</a></li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+	<!-- NAVBAR -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu toggle-sidebar' ></i>
+			<!-- <form action="#"></form> -->
+			<div class="container">
+				<form class="d-flex" role="search">
+					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="buscador" ">
+				  <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+				</form>
+			</div>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<h2 id="tituloTabla"></h2>
+			<div class="container-fluid">
+				<!-- customElement Agregado por javascript -->
+			</div>
+
+			<style rel="stylesheet">
+				@import "./components/modalStyle.css";
+			</style>
+			<div class="section full-height">
+				<input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" style="display:none"/>
+				<label for="modal-btn"><i class="uil uil-expand-arrows"></i></label> 		
+				<div class="modal">		
+					<div class="modal-wrap" id="modalWindow">	
+					   
+					</div>			          		
+				</div>	
+			</div>
+			<!-- <button type="button" class="btn btn-outline-primary" id="segundoBoton">Eliminar Asignacion</button>
+			 -->
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- NAVBAR -->
+</body>
+</html>	

@@ -1,0 +1,31 @@
+.activos li{
+    --dataSection: 'activos'
+}
+.marcas li{
+    --dataSection: 'marcas'
+}
+.personas li{
+    --dataSection: 'personas'
+}
+.estado li{
+    --dataSection: 'estado'
+}
+.tipoPersona li{
+    --dataSection: 'tipoPersona'
+}
+.tipoMovAct li{
+    --dataSection: 'tipoMovActivo'
+}
+.tipoActivo li{
+    --dataSection: 'tipoActivo'
+}
+.asignacion li{
+    --dataSection: 'asignacion'
+}
+.proveedores li{
+    --dataSection: 'proveedores'
+}
+
+main:has(.section:has(#modal-btn:checked)) > .container-fluid{
+    height: 0px;
+}
