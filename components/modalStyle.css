@@ -140,7 +140,7 @@
     width: 100%;
     border-radius: 6px;
     padding: 30px;
-    /* margin: 0 15px; */
+    margin: 0 auto;
     background-color: #fff;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
@@ -163,7 +163,7 @@
 .formAgg form{
     position: relative;
     margin-top: 16px;
-    min-height: 490px;
+    min-height: 200px;
     background-color: #fff;
     overflow: hidden;
 }

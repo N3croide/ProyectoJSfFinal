@@ -1,11 +1,5 @@
 import * as api from '../js/api.js'
 
-// const allData = api.getAll();
-// let activosdata = Object.values(allData)
-// console.log(allData,' activos: ', activosdata);
-
-
-
 class Tabla extends HTMLElement{
     constructor(data,db){
         super();
@@ -138,6 +132,114 @@ export class Editar extends Tabla{
 
     
 }
+export class CrearAsignacion extends HTMLElement{
+    constructor(){
+        super();
+        this.render();
+        this.fillPersona();
+    }
+    render(){
+        this.innerHTML = /* html */`
+        <div class="formAgg" style="height: fit-content;">
+            <header id='test'>Crear Asignacion</header>
+            <form action="" id='formulario'>
+                <div class="form first">
+                    <div class="details personal">
+                        <div class="fields">
+                            <div class="input-field">
+                                <label>Fecha</label>
+                                <input type="date" placeholder="" required name="fecha">
+                            </div>
+                            <div class="input-field">
+                                <label>Persona Responsable</label>
+                                <select id="idPersonaResp" required name="idPersonaResp">
+                                    <option disabled selected>Selecciona la persona</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button>
+                            <span class="btnText">Crear</span>
+                        </button>
+                    </div> 
+                </div>
+            </form>
+        </div>
+`,
+        this.querySelector('#formulario').addEventListener('submit',async ()=>{
+        let form = this.querySelector("#formulario");
+        const data = Object.fromEntries(new FormData(form).entries());
+        let lastId = await getLastId('asignacion');
+        data['id'] = ((lastId != (null || undefined) ? parseInt(lastId) : 0) + 1).toString();
+        await api.post(data,'asignacion');
+        }),
+        this.querySelector('#idPersonaResp')
+    }
+    async fillPersona(){
+        let options = this.querySelector('#idPersonaResp');
+        let datos = await api.getElement('personas');
+        let html =``; 
+        
+        datos.forEach(element => {
+            html += `<option value="${element['id']}">${element['nombre']}</option>`
+        })
+
+        console.log(html);
+        options.innerHTML += html;
+        console.log(options.innerHTML);
+    }
+}
+
+// export class AsignarAsignacion extends HTMLElement{
+//     constructor(){
+//         super();
+//         this.getData();
+//         this.render(this.getData());
+//     }
+//     render(data){
+//         if(data.length > 0){
+//         this.innerHTML = /* html */
+//         `
+//         <style rel="stylesheet">
+//         @import "./components/contentStyle.css";
+//         </style>
+//         <table class="table table-hover">
+//             <tr>
+//                 ${Object.keys(data[0]).map( key => `<th>${key}</th>`).join('')}
+//                 <th scope="col">Acciones</th>
+//             </tr>
+//             ${data.map(item => this.renderRow(item)).join('')}
+//         </table>
+//         `}
+//         else{
+//             this.innerText = "No hay datos"
+//         }
+//     }
+//     renderRow(data){
+//         return /* html */ `
+//         <tr class="rowTable">
+//             ${Object.values(data).map(value => `<td id='rows'>${value}</td>`).join('')}
+//             <td> <button class='buttonTable actionBtn'>${this.renderAction()}</button> </td>
+//         </tr>`;
+//     }
+//     renderAction(){
+//         return ``
+//     }
+//     async getData(){
+//         const data = await api.getElement('asignacion');
+//         const personas = await api.getElement('personas');
+//         let personasInData;
+//         personas['id'].forEach( id => 
+//             {
+//                 data['id'].forEach(idPersona => {
+//                     if(id == idPersona)
+//                     {
+//                         personasInData += `<option value="${personas['id']}">${personas['nombre']}</option>`
+//                     }
+//                 })
+//             })
+//         document.querySelector('#buscador'.setAtribute(list,listaPersonas))
+//     }
+// }
 
 
 export class AgregarActivos extends HTMLElement{
@@ -380,4 +482,5 @@ customElements.define('table-buscar',Buscar);
 customElements.define('form-agregar',AgregarActivos);
 customElements.define('table-eliminar',Eliminar);
 customElements.define('table-editar',Editar);
+customElements.define('asignacion-crear',CrearAsignacion);
 

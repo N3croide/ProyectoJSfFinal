@@ -12,15 +12,21 @@ document.querySelectorAll(".btnSection").forEach(element =>{
         let actionPlusCategory = action + " " +category[0].charAt(0).toUpperCase() + category.slice(1);
         tituloTabla.innerText = actionPlusCategory;
         let data = await api.getElement(category);
-        let createClass = (action != 'Agregar') ? content[action] : content[actionPlusCategory.replace(/ /g, '')];
-        let elementoAgg = (action != 'Agregar') ? new createClass(data,category) : new createClass(action);
-        contentContiner.innerHTML ="";
-        modalWindow.innerHTML = "";
-        action != 'Agregar' ? contentContiner.appendChild(elementoAgg) : modalWindow.appendChild(elementoAgg);
+        if (category != 'asignacion')
+        {
+            let createClass = (action != 'Agregar') ? content[action] : content[actionPlusCategory.replace(/ /g, '')];
+            let elementoAgg = (action != 'Agregar') ? new createClass(data,category) : new createClass(action);
+            contentContiner.innerHTML ="";
+            modalWindow.innerHTML = "";
+            action != 'Agregar' ? contentContiner.appendChild(elementoAgg) : modalWindow.appendChild(elementoAgg);
+        }else{
+            let createClass = content[actionPlusCategory.replace(/ /g, '')];
+            let elementAgg = new createClass();
+            contentContiner.innerHTML = "";
+            contentContiner.appendChild(elementAgg)
+        }
     })
 })
-
-
 
 document.querySelector("#buscador").addEventListener('keyup',()=>{
     let input = buscador.value.toLowerCase();
