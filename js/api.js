@@ -4,39 +4,9 @@ const myHeaders = new Headers({
 });
 
 
-// const getAll = () =>{
-//     let datos = {};
-//     const endpoints = [
-//         "activos",
-//         "categoriaActivos",
-//         "proveedor",
-//         "tipoActivo",
-//         "marcas",
-//         "estado",
-//         "personas",
-//         "tipoPersona",
-//         "telefonoPersona",
-//         "tipoMovActivo",
-//         "historialActivo",
-//         "asignacion",
-//         "detalleMovimiento"
-//       ];
-//       endpoints.map(async url => {
-//         try {
-//             const respuesta = await fetch(`${URT_API}/${url}`);
-//             if (respuesta.status === 200) {
-//                 const resultado = respuesta.json();
-//                   datos[] = resultado;
-//             }
-//         } catch (error) {
-//             console.log('Error con el método GET: ', error);
-//         }
-//     });
-//     return datos;
-// };
 const getCategory = async(element) =>{
     try {
-        const respuesta =await fetch(`${URT_API}/${element}`);
+        const respuesta = await fetch(`${URT_API}/${element}`);
         if (respuesta.status == 200) {
             let datos = await respuesta.json();
             return datos;
@@ -53,6 +23,7 @@ const getCategoryElement = async(element,id) =>{
             return datos;
         }
     } catch (error) {
+        alert(error)
         console.log('Error con el metodo GET: ', error);
     }
 }

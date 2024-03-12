@@ -211,8 +211,8 @@ export class CrearAsignacion extends HTMLElement{
         this.querySelector('#formulario').addEventListener('submit',async ()=>{
         let form = this.querySelector("#formulario");
         const data = Object.fromEntries(new FormData(form).entries());
-        let lastId = await getLastId('asignacion');
-        data['id'] = ((lastId != (null || undefined) ? parseInt(lastId) : 0) + 1).toString();
+        let idUltimo = await getLastId('asignacion');
+        data['id'] = ((idUltimo != (null || undefined) ? parseInt(idUltimo) : 0) + 1).toString();
         await api.post(data,'asignacion');
         }),
         this.querySelector('#idPersonaResp')
@@ -226,9 +226,7 @@ export class CrearAsignacion extends HTMLElement{
             html += `<option value="${element['id']}">${element['nombre']}</option>`
         })
 
-        console.log(html);
         options.innerHTML += html;
-        console.log(options.innerHTML);
     }
 }
 
@@ -278,7 +276,7 @@ export class CrearMovimientoActivo extends HTMLElement{
 				<!-- customElement Agregado por javascript -->
                 <table class="table table-hover">
                 <tr>
-                    ${Object.keys(data[0]).map( key => `<th>${key}</th>`).join('')}
+                    ${(Object.keys(data[0]).map( key => `<th>${key}</th>`).join(''))}
                     <th scope="col">Acciones</th>
                 </tr>
                 ${data.map(item => this.renderRow(item)).join('')}
@@ -286,19 +284,21 @@ export class CrearMovimientoActivo extends HTMLElement{
 			    </div>
             </div>
         `;
-        this.querySelector('#formulario').addEventListener('submit', async (e) => {
+        this.querySelector('button').addEventListener('click', async (e) => {
+            e.preventDefault()
             let form = this.querySelector("#formulario");
             const data = Object.fromEntries(new FormData(form).entries());
-            let lastId = await getLastId('movActivo');
-            let activo = await api.getCategoryElement('activo',data['idActivo'])
-            activo['estado'] = 'Asignado';
-            data['id'] = ((lastId != (null || undefined) ? parseInt(lastId) : 0) + 1).toString();
+            let ultimoID = await getLastId('movActivo');
+            alert(data['idActivo']);
+            let itemActivo = await api.getCategoryElement('activos',data['idActivo'])
+            itemActivo['estado'] = 'Asignado';
+            data['id'] = ((ultimoID != (null || undefined) ? parseInt(ultimoID) : 0) + 1).toString();
             await api.post(data, 'movActivo');
-            await api.patch(activo,'activo',activo['id'])
+            await api.patch(itemActivo,'activos',itemActivo['id'])
         });
         this.querySelector("#buscador").addEventListener('keyup',()=>{
-            let input = buscador.value.toLowerCase();
-            let rows = document.querySelectorAll('.rowTable');
+            let input = this.querySelector("#buscador").value.toLowerCase();
+            let rows = this.querySelectorAll('.rowTable');
             rows.forEach(row =>{
                 let rowVisibility = false;
                 row.querySelectorAll("#rows").forEach(rowContent =>{
@@ -381,13 +381,11 @@ export class AsignarAsignacion extends HTMLElement{
                 data.forEach(asignacion => {
                     if(dataPersonas['id'] == asignacion['idPersonaResp'])
                     {
-                        // listaPersonas += `<option value="${personas['id']}">${personas['nombre']}</option>`
                         listaPersonas.push(dataPersonas)
                         this.idAsignaciones[dataPersonas['id']]=(asignacion['id'])
                     }
                 })
         })
-        // document.querySelector('#buscador'.setAttribute('list',listaPersonas))
         return listaPersonas;
     }
     btnAction(){
@@ -407,15 +405,19 @@ export class AsignarAsignacion extends HTMLElement{
             element.forEach(activo =>{
                 activo['estado'] == "No asignado" ? noAsignados.push(activo) : '';
             })
-            
-            let idAsignacion = this.idAsignaciones[id]
-            let instancia = new CrearMovimientoActivo(idAsignacion,noAsignados);  
-            instancia.idAsignacion = idAsignacion;
-            
-            let modalBtn = document.querySelector("#modal-btn");
-            modalBtn.checked = true;
-            
-            modal.appendChild(instancia);
+            if (noAsignados.length >0 ){
+                let idAsignacion = this.idAsignaciones[id]
+                let instancia = new CrearMovimientoActivo(idAsignacion,noAsignados);  
+                instancia.idAsignacion = idAsignacion;
+                
+                let modalBtn = document.querySelector("#modal-btn");
+                modalBtn.checked = true;
+                
+                modal.appendChild(instancia);
+            }else{
+                alert('No hay activos disponibles para asignar');
+            }
+
         })
     )}
     getRowId(target) {
@@ -840,8 +842,7 @@ async function getDatos(url){
 }
 async function getLastId(tipo){
     let datos = await api.getElement(tipo);
-    let lastid = datos[(Object.keys(datos).length - 1)]["id"];
-    console.log(lastid);
+    let lastid = datos!='' ? datos[(Object.keys(datos).length - 1)]["id"] : 0;
     return lastid;
 }
 async function fillForm(form, data) {
