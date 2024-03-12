@@ -285,7 +285,6 @@ export class CrearMovimientoActivo extends HTMLElement{
             </div>
         `;
         this.querySelector('button').addEventListener('click', async (e) => {
-            e.preventDefault()
             let form = this.querySelector("#formulario");
             const data = Object.fromEntries(new FormData(form).entries());
             let ultimoID = await getLastId('movActivo');
@@ -551,9 +550,9 @@ export class AgregarTipoPersona extends HTMLElement{
 this.querySelector('#formulario').addEventListener('submit', async () => {
     let form = this.querySelector("#formulario");
     const data = Object.fromEntries(new FormData(form).entries());
-    let lastId = await getLastId('tiposPersona'); // Cambiar por el nombre correcto del recurso
+    let lastId = await getLastId('tipoPersona'); // Cambiar por el nombre correcto del recurso
     data['id'] = ((lastId != (null || undefined) ? parseInt(lastId) : 0) + 1).toString();
-    this.querySelector(".btnText").innerText == 'Crear' ? await api.post(data,'tiposPersona') : await api.patch(data,'tiposPersona',this.idElement); // Cambiar por el nombre correcto del recurso
+    this.querySelector(".btnText").innerText == 'Crear' ? await api.post(data,'tipoPersona') : await api.patch(data,'tipoPersona',this.idElement); // Cambiar por el nombre correcto del recurso
 });
 }
 }

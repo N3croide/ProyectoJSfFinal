@@ -15,6 +15,7 @@ const getCategory = async(element) =>{
         console.log('Error con el metodo GET: ', error);
     }
 }
+
 const getCategoryElement = async(element,id) =>{
     try {
         const respuesta =await fetch(`${URT_API}/${element}/${id}`);
@@ -50,15 +51,15 @@ const patch = async(data, element,id) =>{
 
 
 const del = async(element,id) =>{
-        try{
-            return await fetch(`${URT_API}/${element}/${id}`,{
-                method: "delete",
-                headers: myHeaders
-            })
-        }
-        catch (error){
-            console.log('Error en la preticion de delete:',error.message)
-        }
+    try{
+        return await fetch(`${URT_API}/${element}/${id}`,{
+            method: "delete",
+            headers: myHeaders
+        })
+    }
+    catch (error){
+        console.log('Error en la preticion de delete:',error.message)
+    }
 }
 
 export{
