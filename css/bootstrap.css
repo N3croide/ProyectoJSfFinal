@@ -12318,7 +12318,7 @@ nav {
 	z-index: 100;
 }
 nav .toggle-sidebar {
-	font-size: 18px;
+	font-size: calc(100% + 25px);
 	cursor: pointer;
 }
 nav form {

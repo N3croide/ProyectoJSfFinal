@@ -14,7 +14,7 @@ document.querySelectorAll(".btnSection").forEach(element =>{
         let data = await api.getElement(category);
         if (category != 'asignacion')
         {
-            let createClass = (action != 'Agregar') ? content[action] : content[actionPlusCategory.replace(/ /g, '')];
+            let createClass = (action != 'Agregar') ? content[action] : content[(actionPlusCategory.replace(/ /g, ''))];
             let elementoAgg = (action != 'Agregar') ? new createClass(data,category) : new createClass(action);
             contentContiner.innerHTML ="";
             modalWindow.innerHTML = "";
@@ -44,3 +44,19 @@ document.querySelector("#buscador").addEventListener('keyup',()=>{
         }
     })
   })
+
+document.querySelectorAll('.btnSection').forEach(btn => {
+    btn.addEventListener('click',() =>{
+        document.getElementById('sidebar').classList.add('hide');
+        // if(sidebar.classList.contains('hide')) {
+		// 	allSideDivider.forEach(item=> {
+		// 		item.textContent = '-'
+		// 	})
+	
+		// 	allDropdown.forEach(item=> {
+		// 		const a = item.parentElement.querySelector('a:first-child');
+		// 		a.classList.remove('active');
+		// 		item.classList.remove('show');
+        //     })}
+    })
+})
