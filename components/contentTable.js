@@ -289,7 +289,6 @@ export class CrearMovimientoActivo extends HTMLElement{
             let form = this.querySelector("#formulario");
             const data = Object.fromEntries(new FormData(form).entries());
             let ultimoID = await getLastId('movActivo');
-            alert(data['idActivo']);
             let itemActivo = await api.getCategoryElement('activos',data['idActivo'])
             itemActivo['estado'] = 'Asignado';
             data['id'] = ((ultimoID != (null || undefined) ? parseInt(ultimoID) : 0) + 1).toString();
@@ -476,7 +475,7 @@ export class AgregarPersonas extends HTMLElement {
             const data = Object.fromEntries(new FormData(form).entries());
             let lastId = await getLastId('personas');
             data['id'] = ((lastId != (null || undefined) ? parseInt(lastId) : 0) + 1).toString();
-            await api.post(data, 'personas');
+            this.querySelector(".btnText").innerText == 'Crear' ? await api.post(data,'personas') : await api.patch(data,'personas',this.idElement)
         });
     }
 }
@@ -510,12 +509,13 @@ export class AgregarEstado extends HTMLElement{
             </form>
         </div>
 `,
-this.querySelector('#formulario').addEventListener('submit', async () => {
+this.querySelector('#formulario').addEventListener('submit', async (e) => {
+    e.preventDefault
     let form = this.querySelector("#formulario");
     const data = Object.fromEntries(new FormData(form).entries());
-    let lastId = await getLastId('estados'); 
+    let lastId = await getLastId('estado'); 
     data['id'] = ((lastId != (null || undefined) ? parseInt(lastId) : 0) + 1).toString();
-    this.querySelector(".btnText") == 'Crear' ? await api.post(data,'estados') : await api.patch(data,'estados',this.idElement)
+    this.querySelector(".btnText").innerText == 'Crear' ? await api.post(data,'estado') : await api.patch(data,'estado',this.idElement)
 })
     }
 }
@@ -553,7 +553,7 @@ this.querySelector('#formulario').addEventListener('submit', async () => {
     const data = Object.fromEntries(new FormData(form).entries());
     let lastId = await getLastId('tiposPersona'); // Cambiar por el nombre correcto del recurso
     data['id'] = ((lastId != (null || undefined) ? parseInt(lastId) : 0) + 1).toString();
-    this.querySelector(".btnText") == 'Crear' ? await api.post(data,'tiposPersona') : await api.patch(data,'tiposPersona',this.idElement); // Cambiar por el nombre correcto del recurso
+    this.querySelector(".btnText").innerText == 'Crear' ? await api.post(data,'tiposPersona') : await api.patch(data,'tiposPersona',this.idElement); // Cambiar por el nombre correcto del recurso
 });
 }
 }
@@ -597,7 +597,7 @@ this.querySelector('#formulario').addEventListener('submit', async () => {
     const data = Object.fromEntries(new FormData(form).entries());
     let lastId = await getLastId('tipoActivo'); // Reemplaza 'tipoActivo' con el nombre correcto de tu recurso
     data['id'] = ((lastId != (null || undefined) ? parseInt(lastId) : 0) + 1).toString();
-    this.querySelector(".btnText") == 'Crear' ? await api.post(data,'tipoActivo') : await api.patch(data,'tipoActivo',this.idElement); // Reemplaza 'tipoActivo' con el nombre correcto de tu recurso
+    this.querySelector(".btnText").innerText == 'Crear' ? await api.post(data,'tipoActivo') : await api.patch(data,'tipoActivo',this.idElement); // Reemplaza 'tipoActivo' con el nombre correcto de tu recurso
 });
 }
 
@@ -647,12 +647,13 @@ export class AgregarTipoMovActivo extends HTMLElement{
             </form>
         </div>
 `,
-    this.querySelector('#formulario').addEventListener('submit', async () => {
+    this.querySelector('#formulario').addEventListener('submit', async (e) => {
             let form = this.querySelector("#formulario");
             const data = Object.fromEntries(new FormData(form).entries());
-            let lastId = await getLastId('tipoMovActivo');
-            data['id'] = ((lastId != (null || undefined) ? parseInt(lastId) : 0) + 1).toString();
-            this.querySelector(".btnText") == 'Crear' ? await api.post(data,'tipoMovActivo') : await api.patch(data,'tipoMovActivo',this.idElement);
+            let ultimoID = await getLastId('tipoMovActivo');
+            data['id'] = ((ultimoID != (null || undefined) ? parseInt(ultimoID) : 0) + 1).toString();
+            console.log(this.querySelector('.btnText'));
+            this.querySelector(".btnText").innerText == 'Crear' ? await api.post(data,'tipoMovActivo') : await api.patch(data,'tipoMovActivo',this.idElement);
         });
     }
 }
@@ -696,7 +697,7 @@ export class AgregarProveedores extends HTMLElement{
             const data = Object.fromEntries(new FormData(form).entries());
             let lastId = await getLastId('proveedores');
             data['id'] = ((lastId != (null || undefined) ? parseInt(lastId) : 0) + 1).toString();
-            this.querySelector(".btnText") == 'Crear' ? await api.post(data,'proveedores') : await api.patch(data,'proveedores',this.idElement);
+            this.querySelector(".btnText").innerText == 'Crear' ? await api.post(data,'proveedores') : await api.patch(data,'proveedores',this.idElement);
         });
     }
 }
@@ -821,12 +822,12 @@ export class AgregarMarcas extends HTMLElement{
             </form>
         </div>
 `,
-    this.querySelector('#formulario').addEventListener('submit',async ()=>{
+    this.querySelector('#formulario').addEventListener('submit',async (e)=>{
         let form = this.querySelector("#formulario");
         const data = Object.fromEntries(new FormData(form).entries());
         let lastId = await getLastId('marcas');
         data['id'] = ((lastId != (null || undefined) ? parseInt(lastId) : 0) + 1).toString();
-        saveData(data,'marcas');
+        this.querySelector(".btnText").innerText == 'Crear' ? await api.post(data,'marcas') : await api.patch(data,'marcas',this.idElement);
     })
     }
 }
